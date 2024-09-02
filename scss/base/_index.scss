@@ -1,0 +1,10 @@
+// baseのSCSSを統括する
+@use "functions" as functions;
+@use "mixin" as mixin;
+@use "colors_and_fonts" as colors_and_fonts;
+@use "global" as global;
+
+@forward "functions";
+@forward "mixin";
+@forward "colors_and_fonts";
+@forward "global";

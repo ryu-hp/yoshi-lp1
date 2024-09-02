@@ -1,0 +1,12 @@
+// mixin
+// メディアクエリ用,未指定の場合はSPを指定
+$breakpoints: (
+  "sp": "(width < 768px)",
+  "pc": "(width >= 768px)",
+);
+
+@mixin mq($breakpoint: "pc") {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}

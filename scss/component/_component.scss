@@ -1,0 +1,494 @@
+@use "../base/index" as *;
+// 汎用コンポーネント
+// 汎用タイトル
+h2.c-common-title {
+  font-size: liquid(24);
+  font-weight: 700;
+
+  @include mq(pc) {
+    font-size: liquid(36);
+  }
+}
+
+// 汎用強調
+.c-em-primary {
+  font-weight: 700;
+  color: $c-primary;
+}
+
+// SPのみ表示
+.c-sp-only {
+  display: none;
+  @include mq(sp) {
+    display: initial;
+  }
+}
+// PCのみのみ表示
+.c-pc-only {
+  display: none;
+  @include mq(pc) {
+    display: initial;
+  }
+}
+
+// リンクボタン
+.c-link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100vmax;
+  color: $c-white;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  line-height: 1.5;
+  background-image: linear-gradient(
+    135deg,
+    transparent 0 40%,
+    $c-white-a75 48% 52%,
+    transparent 60% 100%
+  );
+  background-size: 300%;
+  background-position: right center;
+  animation: shine 4s linear infinite;
+
+  // 色指定
+  &.m-reserve {
+    background-color: $c-primary;
+  }
+
+  &.m-consult {
+    background-color: $c-line;
+  }
+
+  // アイコン有基本
+  &.m-has-icon {
+    justify-content: space-between;
+    height: liquid(52);
+    padding-inline: 1.263em 0.684em;
+    font-size: liquid(19);
+    font-weight: 700;
+
+    &::before,
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      background-position: center;
+      background-size: cover;
+      aspect-ratio: 1/ 1;
+    }
+
+    &::before {
+      width: 1.37em;
+    }
+
+    &.m-reserve::before {
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-reserve.svg);
+    }
+
+    &.m-consult::before {
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-consult.svg);
+    }
+
+    &::after {
+      width: 1.263em;
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-right-arrow.svg);
+    }
+
+    @include mq() {
+      height: liquid(80);
+      font-size: liquid(29);
+    }
+  }
+
+  // ヘッダーメニュー用
+  &.m-2line {
+    flex-flow: column;
+    gap: 0.285em;
+    font-size: liquid(14);
+    padding-bottom: 0.57em;
+    line-height: 1;
+
+    @include mq() {
+      font-size: liquid(17);
+    }
+  }
+
+  // fv用
+  &.m-fv {
+    height: liquid(63);
+    font-size: liquid(24);
+    font-weight: 700;
+    padding-inline: 1.16em 0.833em;
+
+    &::before {
+      width: 1.333em;
+    }
+
+    &::after {
+      width: 1.25em;
+    }
+
+    @include mq() {
+      height: liquid(96);
+      font-size: liquid(36);
+    }
+  }
+
+  @media (any-hover: hover) {
+    transition: scale 0.25s ease-in-out;
+    &:hover {
+      scale: 1.05;
+    }
+  }
+}
+
+// 販促テキスト用
+.c-action-text {
+  display: flex;
+  position: relative;
+  align-items: baseline;
+  justify-content: center;
+
+  &::before,
+  &::after {
+    content: "";
+    background-position: center;
+    background-size: cover;
+  }
+
+  // ヘッダーメニューの装飾用
+  &.m-slash-w-01 {
+    gap: liquid(2);
+    font-size: liquid(9);
+    & > .c-large {
+      font-size: 1.66em;
+    }
+    &::before,
+    &::after {
+      width: 1.1em;
+      aspect-ratio: 10/ 11;
+      translate: 0 0.22em;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    &::before {
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-slash-w01-left.svg);
+    }
+    &::after {
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-slash-w01-right.svg);
+    }
+
+    @include mq() {
+      font-size: liquid(11);
+    }
+  }
+
+  // fvの販促テキスト用
+  &.m-fv {
+    gap: liquid(5);
+    font-weight: 700;
+    font-size: liquid(17);
+
+    &::before,
+    &::after {
+      width: 1.35em;
+      aspect-ratio: 23/ 17;
+    }
+    &::before {
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-slash-s-left.svg);
+    }
+    &::after {
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-slash-s-right.svg);
+    }
+
+    @include mq() {
+      font-size: liquid(18);
+    }
+  }
+
+  // CTAの販促用テキスト
+  &.m-cta {
+    gap: liquid(3);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+
+    &::before,
+    &::after {
+      position: absolute;
+      width: 1.25em;
+      aspect-ratio: 20/ 30;
+    }
+    &::before {
+      left: -1.25em;
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-slash-w02-left.svg);
+    }
+    &::after {
+      right: -1.3em;
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-slash-w02-right.svg);
+    }
+
+    @include mq() {
+      font-size: liquid(26);
+
+      &::before,
+      &::after {
+        width: 1.2em;
+      }
+    }
+  }
+}
+
+/* 丸アイコン */
+.c-rounded-icon {
+  display: grid;
+  place-items: center;
+  grid-template-rows: 30% 40%;
+  gap: 10%;
+  width: min(100%, liquid(100));
+  aspect-ratio: 1/ 1;
+  border-radius: 50%;
+  padding-block: liquid(10);
+  border: liquid(3) solid currentColor;
+  color: $c-primary;
+  background: $c-white;
+  box-shadow: 0 0 liquid(6) rgb(0 0 0/0.5);
+  text-align: center;
+  font-size: liquid(13);
+  font-weight: 700;
+  line-height: 1.3;
+
+  &::before {
+    content: "";
+    width: liquid(30);
+    aspect-ratio: 1/ 1;
+    background-position: center;
+    background-size: cover;
+  }
+
+  // 中サイズ {
+  &.m-middle {
+    gap: 10%;
+    width: min(100%, liquid(84));
+    padding-top: liquid(14);
+
+    &::before {
+      width: liquid(28);
+    }
+
+    @include mq() {
+      gap: 20%;
+      width: min(100%, liquid(101));
+      padding-top: liquid(18);
+
+      &::before {
+        width: liquid(34);
+      }
+    }
+  }
+
+  &.m-outpatient {
+    grid-template-rows: 50% 30%;
+    font-size: liquid(14);
+    line-height: 1.3;
+
+    &::before {
+      content: "";
+      width: 3.571em;
+      aspect-ratio: 70/ 55;
+      background-position: center;
+      background-size: cover;
+    }
+
+    @include mq() {
+      font-size: liquid(18);
+    }
+  }
+
+  // fvの特徴
+  &.m-features-01::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-features-01.svg);
+  }
+  &.m-features-02::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-features-02.svg);
+  }
+  &.m-features-03::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-features-03.svg);
+  }
+
+  // 病気リスク
+  &.m-complications-01::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-complications-01.webp);
+  }
+  &.m-complications-02::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-complications-02.webp);
+  }
+  &.m-complications-03::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-complications-03.webp);
+  }
+
+  // 外来
+  &.m-outpatient-01::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-outpatient-01.webp);
+  }
+  &.m-outpatient-02::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-outpatient-02.webp);
+  }
+  &.m-outpatient-03::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-outpatient-03.webp);
+  }
+
+  @include mq() {
+    gap: 20%;
+    width: min(100%, liquid(132));
+    font-size: liquid(18);
+    padding-block: liquid(22);
+
+    &::before {
+      width: liquid(38);
+    }
+  }
+}
+
+// 格子状のテキスト
+.c-box-text {
+  display: inline-grid;
+  place-items: center;
+  padding: liquid(2);
+  border: 1px solid currentColor;
+  color: $c-primary;
+  background: $c-white;
+  font-size: 1.5em;
+  line-height: 1;
+
+  @include mq() {
+    font-size: liquid(36);
+    line-height: 1.1;
+  }
+}
+
+// アコーディオンメニュー制御用
+.c-accordion {
+  --duration: 500ms;
+  padding: 0;
+  border-radius: 0.625rem;
+  background: $c-white;
+  box-shadow: 0 0 4px rgb(0 0 0/0.25);
+  overflow: clip;
+  color: #449dd0;
+}
+
+.c-accordion__question {
+  display: grid;
+  grid-template-columns: liquid(37) 1fr liquid(16);
+  align-items: center;
+  gap: liquid(12);
+  width: 100%;
+  padding: liquid(16);
+  font-weight: 700;
+  background: $c-white;
+  font-size: liquid(16);
+  transition: background 0.25s linear, color 0.25s linear;
+
+  &::before {
+    content: "Q";
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    font-family: $font-en-2;
+    font-weight: 700;
+    background: $c-primary;
+    color: $c-white;
+    transition: background 0.25s linear, color 0.25s linear;
+  }
+
+  & > .m-icon {
+    display: grid;
+    color: currentColor;
+    &::before,
+    &::after {
+      content: "";
+      grid-area: 1/ 1/ -1/ -1;
+      display: grid;
+      place-items: center;
+      height: 2px;
+      background-color: currentColor;
+    }
+
+    &::before {
+      rotate: 90deg;
+      transition: rotate ease-out var(--duration);
+    }
+  }
+
+  .c-accordion.is-open & {
+    color: $c-white;
+    background: $c-primary;
+
+    &::before {
+      color: $c-primary;
+      background: $c-white;
+    }
+
+    & > .m-icon::before {
+      rotate: 0deg;
+    }
+  }
+
+  @include mq() {
+    padding: liquid(14) liquid(24) liquid(14) liquid(16);
+    font-size: liquid(18);
+  }
+}
+
+.c-accordion__answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--duration) ease-out,
+    padding-top var(--duration) ease-out, opacity var(--duration) linear;
+
+  .c-accordion.is-open & {
+    grid-template-rows: 1fr;
+    padding-block: liquid(16);
+    opacity: 1;
+  }
+}
+
+.c-accordion__answer-box {
+  display: flex;
+  gap: liquid(12);
+  align-items: center;
+  overflow: hidden;
+  padding-inline: liquid(16);
+
+  &::before {
+    flex-shrink: 0;
+    content: "A";
+    display: grid;
+    place-items: center;
+    width: liquid(36);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    font-family: $font-en-2;
+    font-weight: 700;
+    background: $c-primary;
+    color: $c-white;
+  }
+  @include mq() {
+    gap: liquid(16);
+  }
+}
+
+.c-accordion__answer-texts {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(8);
+  line-height: 1.6;
+
+  @include mq() {
+    font-size: liquid(18);
+  }
+}

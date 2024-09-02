@@ -1,0 +1,51 @@
+@use "functions" as *;
+@use "mixin" as *;
+@use "colors_and_fonts" as *;
+
+// CSSによるサイトの基本設定
+// サイト全体に適用する設定・reset.cssを補完する設定を定義
+
+// カスタムプロパティ定義
+:root {
+  // コンテンツ幅
+  --contents-pc: min(calc(100% - #{pxToRem(48)}), #{pxToRem(1100)});
+  --contents-sp: min(100%, #{pxToRem(400)});
+
+  // PC版とスマホ版のベース文字サイズ
+  // PC版 最小値: SP版デザインへのブレークポイント,　最大値:コンテンツ幅
+  --liquid-size-pc: #{clampWithPxToRem(11, 16, 768, 1200)};
+  // SP版 最小値: 表示を配慮する最小幅,　最大値: SP版デザインのアートボード幅
+  --liquid-size-sp: #{clampWithPxToRem(12, 16, 300, 375)};
+
+  // サイト全体の基本サイズ、メディアクエリのブレークポイントは一致させること
+  --liquid-size: var(--liquid-size-sp);
+  --contents: var(--contents-sp);
+
+  @include mq(pc) {
+    --liquid-size: var(--liquid-size-pc);
+    --contents: var(--contents-pc);
+  }
+}
+
+// 共通設定
+body {
+  background: $c-white;
+  font-size: pxToRem(16);
+  font-family: $font-jp;
+  color: $c-dark-gray-1;
+  line-height: 1.5;
+}
+
+// details summaryのマーカーを消す
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+// em基本設定
+em {
+  font-style: normal;
+}

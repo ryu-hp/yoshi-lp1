@@ -1,0 +1,58 @@
+@use "sass:math";
+// functions
+// サイズ指定用(px →rem 変換)
+@function pxToRem($px: 0) {
+  @return if($px !=0, math.div($px, 16) * 1rem, 0);
+}
+
+// clamp()生成用
+// **ビューポートの引数初期値
+$defaultMinVp: 320;
+$defaultMaxVp: 1440;
+
+// **生成関数
+@function clampWithPxToRem(
+  $minSize,
+  $maxSize,
+  $minVp: $defaultMinVp,
+  $maxVp: $defaultMaxVp
+) {
+  @if ($maxVp - $minVp) ==0 {
+    @warn "【clampWithPxToRem】ビューポート同値により0除算発生のため、1remを返り値にしています";
+    @return 1rem;
+  }
+
+  // 小数点以下の桁数
+  $exponent: 3;
+  $roundFactor: pow(10, $exponent);
+
+  // px→rem変換係数
+  $pxToRemFactor: 0.0625rem;
+
+  // 傾きと切片取得
+  $slope: math.div(($maxSize - $minSize), ($maxVp - $minVp));
+  $intercept: $minSize - ($minVp * $slope);
+  $outputSlope: math.div(round($slope * $roundFactor * 100), $roundFactor) * 1vw;
+  $outputIntercept: math.div(
+    round($intercept * $roundFactor * $pxToRemFactor),
+    $roundFactor
+  );
+  @return clamp(
+    $minSize * $pxToRemFactor,
+    $outputSlope + $outputIntercept,
+    $maxSize * $pxToRemFactor
+  );
+}
+
+// clampで調整したサイズ反映用
+// **CSS変数
+$liquid-size-cssVars: (
+  "base": "--liquid-size",
+  "pc": "--liquid-size-pc",
+  "sp": "--liquid-size-sp",
+);
+
+@function liquid($multiplier: 16, $cssVar: "base") {
+  $selectedVar: #{map-get($liquid-size-cssVars, $cssVar)};
+  @return calc(var($selectedVar) * $multiplier * 0.0625);
+}

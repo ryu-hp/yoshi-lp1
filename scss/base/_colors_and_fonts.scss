@@ -1,0 +1,27 @@
+// 変数（フォント・色）定義
+// フォント定義
+$font-jp: "Noto Sans JP", sans-serif;
+$font-en: "Oswald", sans-serif;
+$font-en-2: arial, "Oswald", sans-serif;
+
+// 色定義
+$c-black: #000;
+$c-white: #fff;
+$c-white-a75: rgb(255 255 255/0.75);
+
+$c-light-gray-0: #eee;
+$c-light-gray-1: #ddd;
+$c-light-gray-2: #d8d8d8;
+$c-light-gray-3: #c6c6c6;
+$c-light-gray-4: #b5b5b5;
+$c-dark-gray-1: #333;
+$c-dark-gray-2: #5c5c5c;
+
+$c-primary: #449dd0;
+$c-primary-a90: rgb(68 157 208/0.9);
+$c-primary-a80: rgb(68 157 208/0.8);
+$c-secondary: #eef6ff;
+$c-accent-01: #177cb5;
+$c-accent-02: #4bb1ee;
+
+$c-line: #06c755;

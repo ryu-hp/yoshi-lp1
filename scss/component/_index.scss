@@ -1,0 +1,4 @@
+// componentのSCSSを統括するファイル
+@use "component" as component;
+
+@forward "component";

@@ -1,0 +1,1962 @@
+@charset "utf-8";
+@use "sass:math";
+/* =========================================================
+  Foundation
+  ========================================================== */
+
+/* Reset Base
+  --------------------------------------------------------- */
+@use "reset/reset";
+@use "base/index" as *;
+
+/* =========================================================
+ *   Layout
+ *========================================================== */
+// layout
+@use "layout/layout";
+
+/* =========================================================
+    Object
+  ========================================================== */
+
+/* Component
+  --------------------------------------------------------- */
+
+/*汎用コンポーネント
+ *********************/
+@use "component/index";
+
+// 文字縁取り用
+.c-stroke-white {
+  filter: url(#stroke-white);
+}
+
+/* Project
+  --------------------------------------------------------- */
+/*header
+   *********************/
+.p-header {
+  display: flex;
+  justify-content: center;
+  padding-inline: pxToRem(15);
+  @include mq() {
+    padding-inline: pxToRem(40);
+  }
+}
+
+.p-header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: var(--contents);
+  padding-block: pxToRem(11);
+
+  @include mq() {
+    width: min(liquid(1200), 100%);
+    padding-right: liquid(30);
+  }
+}
+
+.p-header__title {
+  width: liquid(139);
+  aspect-ratio: 139/ 43;
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include mq() {
+    width: liquid(151);
+  }
+}
+
+.p-header__link {
+  width: liquid(132);
+  aspect-ratio: 132/ 48;
+  @include mq() {
+    width: liquid(167);
+  }
+}
+
+/*
+  Project**
+  ---------------------------------------------------------
+  */
+
+/* ファーストビュー
+  --------------------------------------------------------- */
+.p-fv {
+  display: flex;
+  justify-content: center;
+  padding-bottom: liquid(32);
+  @include mq() {
+    padding-bottom: liquid(26);
+  }
+}
+
+.p-fv__inner {
+  display: grid;
+  grid-template-areas:
+    "mv"
+    "desc"
+    "icon"
+    "fee"
+    "link";
+  justify-items: center;
+  position: relative;
+  z-index: 0;
+  width: min(100%, liquid(420));
+  padding-inline: liquid(10);
+
+  @include mq() {
+    width: min(100%, liquid(1288));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "mv   mv"
+      "desc fee"
+      "link link";
+    padding-inline: liquid(24);
+  }
+}
+
+.p-fv__mv-box {
+  grid-area: mv;
+  display: grid;
+  position: relative;
+  width: 100%;
+  border-radius: liquid(10);
+  overflow: clip;
+  & > * {
+    grid-area: 1/ 1/ -1/ -1;
+  }
+
+  @include mq() {
+    border-radius: liquid(42);
+  }
+}
+
+.p-fv__mv {
+  width: 100%;
+  aspect-ratio: 357/ 276;
+  object-fit: cover;
+  @include mq() {
+    aspect-ratio: 1240/ 730;
+  }
+}
+
+.p-fv__desc {
+  grid-area: desc;
+  font-size: liquid(18);
+  padding-block: liquid(6) liquid(13);
+
+  @include mq() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-block: liquid(20) liquid(0);
+    font-size: liquid(34);
+  }
+}
+
+.p-fv__features {
+  grid-area: icon;
+  display: flex;
+  align-items: center;
+  gap: liquid(16);
+  justify-content: center;
+  padding-inline: liquid(9);
+  width: 100%;
+
+  @include mq() {
+    grid-area: mv;
+    place-self: end start;
+    justify-content: flex-start;
+    gap: liquid(22);
+    z-index: 1;
+    position: relative;
+    left: liquid(32);
+    bottom: liquid(24);
+  }
+}
+
+.p-fv__fee {
+  grid-area: fee;
+  padding-top: liquid(14);
+  width: 100%;
+  padding-inline: liquid(12);
+
+  @include mq() {
+    padding-top: liquid(20);
+    padding-inline: liquid(52);
+  }
+}
+
+.p-fv__link {
+  grid-area: link;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: liquid(5);
+  width: min(100%, liquid(527));
+  padding-top: liquid(14);
+  padding-inline: liquid(5);
+
+  @include mq() {
+    padding-top: liquid(9);
+  }
+}
+
+// fvの構成要素
+h2.p-fv-catchphrase {
+  place-self: end start;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 0.333em;
+  position: relative;
+  left: liquid(5);
+  bottom: liquid(24);
+  font-size: liquid(24);
+  font-weight: 700;
+  letter-spacing: 0;
+  color: $c-white;
+
+  @include mq() {
+    left: liquid(40);
+    bottom: liquid(174);
+    font-size: liquid(58);
+  }
+}
+
+.p-fv-title__text {
+  border-radius: liquid(8);
+  padding: liquid(4);
+  background: $c-primary-a90;
+
+  @include mq() {
+    border-radius: liquid(20);
+    padding: liquid(15);
+  }
+}
+
+.p-fv-doctor {
+  place-self: end end;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 0.125em;
+  position: relative;
+  bottom: liquid(6);
+  right: liquid(8);
+  padding: 0.4375em 1.25em;
+  border-radius: 0.25em;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: liquid(16);
+
+  @include mq() {
+    gap: 0.22em;
+    padding: 0.2em 0.9em 0.4em;
+    bottom: liquid(35);
+    right: liquid(38);
+    font-size: liquid(40);
+  }
+}
+
+.p-fv-doctor__title {
+  font-size: 0.5625em;
+  @include mq() {
+    font-size: 0.65em;
+  }
+}
+
+.p-fv-doctor__name {
+  font-weight: 700;
+}
+
+.p-fee-card {
+  display: flex;
+  gap: liquid(18);
+  width: 100%;
+  height: liquid(66);
+  border-radius: liquid(10);
+  overflow: clip;
+  background: $c-white;
+  box-shadow: 0 0 liquid(7) rgb(0 0 0/0.3);
+
+  @include mq() {
+    max-width: liquid(414);
+    height: liquid(83);
+  }
+}
+
+.p-fee-card__title {
+  display: flex;
+  align-items: center;
+  width: 26%;
+  color: $c-white;
+  padding-left: 1em;
+  font-size: liquid(18);
+  font-weight: 700;
+  background: $c-primary;
+  clip-path: circle(100% at 0 center);
+
+  @include mq() {
+    font-size: liquid(22);
+  }
+}
+
+.p-fee-card__desc {
+  display: flex;
+  align-items: center;
+  gap: liquid(5);
+  color: #333;
+  font-size: liquid(16);
+  @include mq() {
+    gap: liquid(11);
+    font-size: liquid(20);
+  }
+}
+
+.p-fee-card__preamble {
+  line-height: 1.2;
+  font-weight: 700;
+  font-size: 0.9375;
+}
+
+.p-fee-card__price {
+  font-size: 2.1875em;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.p-fee-card__comma {
+  font-size: 0.51em;
+}
+.p-fee-card__unit {
+  font-size: 0.48em;
+}
+
+.p-fee-card__supplement {
+  line-height: 1.1;
+  text-align: center;
+  font-size: 0.75em;
+  padding-left: 0.33em;
+}
+
+/* お悩み
+  --------------------------------------------------------- */
+.p-concerns {
+  display: flex;
+  justify-content: center;
+  padding-block: liquid(36) liquid(41);
+  background: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/bg-concerns.webp) center/cover;
+
+  @include mq() {
+    padding-block: liquid(81) liquid(65);
+  }
+}
+
+.p-concerns__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: min(var(--contents), 95%);
+}
+
+h2.p-concerns__title {
+  display: flex;
+  flex-flow: column;
+  gap: 0.8125em;
+  align-items: center;
+  font-size: liquid(16);
+  letter-spacing: 0.05em;
+
+  @include mq() {
+    font-size: liquid(26);
+    letter-spacing: 0.02em;
+  }
+}
+
+.p-concerns__em-decoration {
+  position: relative;
+  font-size: 1.5em;
+  background: radial-gradient(circle at center, $c-primary 20%, transparent 20%)
+    top right/ 1em 0.3em repeat-x;
+  padding-top: 0.1em;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 60%;
+    left: 100%;
+    width: 0.5em;
+    aspect-ratio: 14/ 17;
+    background: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-concerns.svg) center/cover;
+  }
+
+  @include mq() {
+    font-size: 1.384em;
+  }
+}
+
+.p-concerns__contents {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  padding-top: liquid(36);
+
+  @include mq() {
+    justify-content: space-between;
+    flex-flow: row-reverse;
+    padding-top: liquid(12);
+  }
+}
+
+.p-concerns__list {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  gap: liquid(21);
+  @include mq() {
+    gap: liquid(20);
+    width: liquid(524);
+  }
+}
+
+.p-concerns__item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 2.5em;
+  border-radius: liquid(40) liquid(8) liquid(8) liquid(40);
+  background: $c-white;
+  color: $c-primary;
+  font-weight: 700;
+
+  &::before {
+    content: "";
+    display: grid;
+    place-items: center;
+    position: absolute;
+    left: 0;
+    width: liquid(29);
+    aspect-ratio: 1/ 1;
+    border-radius: 50%;
+    color: $c-white;
+    background: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-check.svg) center/cover;
+  }
+
+  @include mq() {
+    font-size: liquid(22);
+    border-radius: liquid(40) liquid(15) liquid(15) liquid(40);
+    padding-block: liquid(4);
+    &::before {
+      width: liquid(45);
+    }
+  }
+}
+
+.p-concern__img {
+  display: grid;
+  place-items: center;
+  width: liquid(312);
+  aspect-ratio: 1/ 1;
+  margin-top: liquid(-12);
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @include mq() {
+    width: liquid(450);
+    padding-left: liquid(95);
+  }
+}
+
+.p-concern__caution {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 0.75em;
+  font-weight: 500;
+  padding-top: liquid(14);
+  text-align: center;
+
+  & .m-small {
+    font-size: 0.875em;
+  }
+
+  & .m-decoration {
+    position: relative;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: $c-primary;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 60%;
+      left: 94%;
+      width: 1em;
+      aspect-ratio: 22/ 21;
+      background: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-surprise.svg) center/cover;
+    }
+  }
+
+  @include mq() {
+    margin-top: liquid(-10);
+    padding-top: liquid(0);
+    font-size: liquid(22);
+  }
+}
+
+/* CTA
+  --------------------------------------------------------- */
+.p-cta {
+  display: flex;
+  justify-content: center;
+  background: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/bg-cta.webp) center/cover;
+
+  @include mq() {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/bg-cta-pc.webp);
+  }
+}
+
+.p-cta__inner {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: var(--contents);
+  padding-block: liquid(32);
+  padding-inline: liquid(3);
+
+  @include mq() {
+    padding-block: liquid(73) liquid(43);
+  }
+}
+
+.p-cta__into-text {
+  position: absolute;
+  top: -1.333em;
+  width: liquid(160);
+  aspect-ratio: 160/ 44;
+  padding-top: liquid(1);
+  background: linear-gradient(to bottom, #76c4eedd 17.49%, #449dd0dd 80.19%);
+  color: $c-white;
+  text-align: center;
+  font-size: liquid(12);
+  line-height: 1.3;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+
+  @include mq() {
+    width: liquid(320);
+    font-size: liquid(22);
+    aspect-ratio: 160/ 40;
+  }
+}
+
+.p-cta__box {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: liquid(21);
+  background: $c-white;
+  padding: liquid(43) liquid(21);
+  color: $c-primary;
+
+  &::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    display: inline-block;
+    inset: liquid(8);
+    border-radius: liquid(13);
+    border: liquid(2) solid currentColor;
+  }
+
+  @include mq() {
+    width: min(liquid(1000), 95%);
+    padding: liquid(28) liquid(44) liquid(36);
+  }
+}
+
+.p-cta__action-text {
+  display: flex;
+  justify-content: center;
+}
+
+.p-cta-links {
+  align-self: stretch;
+  display: flex;
+  flex-flow: column;
+  gap: liquid(24);
+  padding-top: liquid(14);
+  padding-inline: liquid(8);
+
+  @include mq() {
+    flex-flow: row;
+  }
+}
+/* 睡眠時無呼吸症候群について
+  --------------------------------------------------------- */
+.p-sleep-apnea {
+  display: flex;
+  justify-content: center;
+  padding-block: liquid(35);
+
+  @include mq() {
+    padding-block: liquid(90);
+  }
+}
+
+.p-sleep-apnea__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: var(--contents);
+}
+
+.p-sleep-apnea__about {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(16);
+  width: 100%;
+  padding-block: liquid(23) liquid(34);
+
+  @include mq() {
+    justify-content: space-between;
+    padding-block: liquid(66) liquid(86);
+    flex-flow: row;
+  }
+}
+
+.p-sleep-apnea__img {
+  width: 100%;
+  aspect-ratio: 345/ 230;
+  border-radius: liquid(10);
+
+  @include mq() {
+    width: liquid(500);
+  }
+}
+
+.p-sleep-apnea__texts {
+  font-size: liquid(18);
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+
+  @include mq() {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    width: liquid(500);
+    font-size: liquid(22);
+    line-height: 1.6;
+  }
+
+  @include mq() {
+    width: liquid(570);
+  }
+}
+
+h3.p-sleep-apnea__caution {
+  position: relative;
+  font-size: liquid(24);
+  font-weight: 700;
+  padding-bottom: liquid(24);
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0.91em;
+    top: -0.542em;
+    right: 2.41em;
+    aspect-ratio: 22/23;
+    background: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-bad.svg) center/cover;
+  }
+
+  @include mq() {
+    font-size: liquid(36);
+    padding-bottom: liquid(60);
+  }
+}
+
+.p-sleep-apnea__risk {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(49);
+  width: 100%;
+  padding-block: liquid(43);
+
+  @include mq() {
+    padding-block: liquid(50) liquid(156);
+    flex-flow: row;
+    justify-content: center;
+    gap: liquid(72);
+  }
+}
+
+.p-sleep-apnea__conclusion {
+  text-align: center;
+  padding-bottom: liquid(18);
+
+  & > .m-large {
+    font-size: 1.25em;
+  }
+
+  @include mq() {
+    font-size: liquid(31);
+  }
+}
+
+.p-sleep-apnea__cured-img {
+  width: 100%;
+  aspect-ratio: 345/ 309;
+  border-radius: liquid(10);
+  overflow: clip;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @include mq() {
+    aspect-ratio: 1100/ 592;
+    & img {
+      aspect-ratio: 1100/ 592;
+    }
+  }
+}
+
+// リスクのカード
+.p-risk-card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: liquid(10);
+  overflow: clip;
+  border-radius: liquid(8);
+  border: 1px solid $c-light-gray-2;
+  background: $c-secondary;
+
+  @include mq() {
+    width: liquid(413);
+    aspect-ratio: 413/ 390;
+  }
+}
+
+h3.p-risk-card__title {
+  flex-shrink: 0;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: liquid(45);
+  gap: liquid(8);
+  font-size: liquid(20);
+  font-weight: 700;
+  background: $c-primary;
+  color: $c-white;
+
+  &::after {
+    content: "";
+    aspect-ratio: 1/1;
+    background-position: center;
+    background-size: cover;
+  }
+
+  &.m-complications::after {
+    width: 1.3em;
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-health-risk.svg);
+  }
+
+  &.m-accident::after {
+    width: 1.7em;
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-accident-risk.svg);
+  }
+
+  @include mq() {
+    font-size: liquid(24);
+    height: liquid(54);
+  }
+}
+
+.p-risk-card__text {
+  padding-top: 0.8em;
+  font-size: liquid(20);
+  font-weight: 500;
+
+  @include mq() {
+    font-size: liquid(24);
+  }
+}
+
+.p-risk-card__incidence {
+  font-size: liquid(20);
+  font-weight: 700;
+  padding-top: liquid(8);
+
+  @include mq() {
+    font-size: liquid(24);
+  }
+}
+
+.p-risk-card__number {
+  font-size: 2.3em;
+}
+
+.p-risk-card__illustration {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  padding-top: liquid(10);
+  padding-inline: liquid(9);
+
+  & > img {
+    aspect-ratio: 308/ 120;
+  }
+
+  @include mq() {
+    gap: liquid(4);
+    padding-inline: liquid(18);
+
+    & > img {
+      width: liquid(308);
+    }
+  }
+}
+
+.p-risk-card__icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  font-size: liquid(16);
+  width: 100%;
+}
+
+.p-risk-card__etc {
+  align-self: flex-end;
+  font-size: liquid(14);
+  @include mq() {
+    font-size: liquid(16);
+  }
+}
+
+.p-risk-card__references {
+  padding-top: liquid(11);
+  padding-left: liquid(8);
+  line-height: 1.25;
+
+  & > small {
+    font-size: liquid(11);
+  }
+}
+/* 病院紹介
+  --------------------------------------------------------- */
+
+.p-about-clinic {
+  display: flex;
+  justify-content: center;
+  padding-bottom: liquid(38);
+  @include mq() {
+    padding-bottom: liquid(80);
+  }
+}
+
+.p-about-clinic__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: var(--contents);
+}
+
+.p-about-clinic__contents {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: liquid(16);
+  padding-top: liquid(24);
+  @include mq() {
+    padding-top: liquid(64);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "tl tr "
+      "bl br";
+    gap: liquid(116) liquid(12);
+  }
+}
+
+.p-about-clinic__img-01 {
+  grid-area: tl;
+  width: 100%;
+  border-radius: liquid(10);
+  overflow: clip;
+  aspect-ratio: 345/ 243;
+  padding-bottom: liquid(4);
+
+  & > img {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include mq() {
+    width: liquid(537);
+  }
+}
+
+.p-about-clinic__desc {
+  grid-area: tr;
+  display: flex;
+  flex-flow: column;
+  gap: liquid(14);
+  font-size: liquid(18);
+  color: $c-black;
+
+  @include mq() {
+    padding-inline: liquid(40);
+    font-size: liquid(22);
+    gap: liquid(64);
+  }
+}
+
+.p-about-clinic__img-02 {
+  grid-area: br;
+  margin-top: liquid(22);
+  aspect-ratio: 345/ 254;
+  overflow: clip;
+
+  & > img {
+    border-radius: liquid(10);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @include mq() {
+    margin-top: liquid(10);
+    aspect-ratio: 536/ 395;
+    & > img {
+      border-radius: liquid(12);
+    }
+  }
+}
+
+.p-about-clinic__online {
+  place-self: start center;
+  grid-area: bl;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: liquid(8);
+  width: 100%;
+
+  @include mq() {
+    width: liquid(550);
+  }
+}
+
+.p-outpatient-icons {
+  display: flex;
+  justify-content: center;
+  gap: liquid(16);
+}
+
+.p-online__title {
+  font-weight: 700;
+  font-size: liquid(16);
+  color: $c-primary;
+
+  @include mq() {
+    font-size: liquid(26);
+  }
+}
+
+.p-online__text {
+  font-size: liquid(13);
+  line-height: 1.6;
+  text-align: center;
+  padding-bottom: liquid(10);
+  @include mq() {
+    padding-top: liquid(16);
+    font-size: liquid(22);
+  }
+}
+
+.p-online-merits {
+  width: 100%;
+  padding-block: liquid(24);
+  border-radius: liquid(10);
+  background: $c-secondary;
+
+  @include mq() {
+    width: liquid(440);
+    padding-block: liquid(36) liquid(24);
+    border-radius: liquid(12);
+  }
+}
+
+.p-online-merits__title {
+  text-align: center;
+  font-size: liquid(14);
+  font-weight: 700;
+  @include mq() {
+    font-size: liquid(18);
+  }
+}
+
+.p-online-merits__desc-container {
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+  gap: liquid(16);
+  padding-top: liquid(20);
+  @include mq() {
+    gap: liquid(20);
+    padding-top: liquid(30);
+  }
+}
+
+.p-online-merits__desc {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: liquid(12);
+
+  &::before {
+    content: "";
+    aspect-ratio: 1/ 1;
+    background-position: center;
+    background-size: cover;
+  }
+
+  &.m-merits-01 {
+    width: 100%;
+    gap: liquid(8);
+    &::before {
+      width: liquid(34);
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-merits-01.svg);
+    }
+  }
+  &.m-merits-02 {
+    width: 45%;
+    gap: liquid(8);
+    &::before {
+      width: liquid(46);
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-merits-02.svg);
+    }
+  }
+  &.m-merits-03 {
+    width: 45%;
+    gap: liquid(12);
+    &::before {
+      width: liquid(42);
+      background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-merits-03.svg);
+    }
+  }
+
+  @include mq() {
+    font-size: liquid(15);
+
+    &.m-merits-01 {
+      &::before {
+        width: liquid(42);
+      }
+    }
+    &.m-merits-02 {
+      gap: liquid(8);
+      &::before {
+        width: liquid(59);
+      }
+    }
+    &.m-merits-03 {
+      gap: liquid(12);
+      &::before {
+        width: liquid(54);
+      }
+    }
+  }
+}
+
+/* 選ばれる理由
+  --------------------------------------------------------- */
+.p-reason {
+  display: flex;
+  justify-content: center;
+  background: $c-secondary;
+  padding-block: liquid(32);
+
+  @include mq() {
+    padding-block: liquid(84);
+  }
+}
+
+.p-reason__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: var(--contents);
+}
+
+.p-reason__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: liquid(42);
+  width: 100%;
+  padding-top: liquid(50);
+
+  @include mq() {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-top: liquid(88);
+    gap: liquid(66) liquid(61);
+
+    & > li:nth-child(even) {
+      translate: 0 liquid(77);
+    }
+  }
+}
+
+.p-reason-card {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(8);
+  position: relative;
+  padding: liquid(15) liquid(16) liquid(11);
+  height: 100%;
+  border-radius: liquid(10);
+  border: 1px solid $c-light-gray-2;
+  background: $c-white;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: liquid(28);
+    right: liquid(24);
+    width: liquid(40);
+    aspect-ratio: 1/ 1;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &.m-reason-01::after {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-reason-01.svg);
+  }
+  &.m-reason-02::after {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-reason-02.svg);
+  }
+  &.m-reason-03::after {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-reason-03.svg);
+  }
+  &.m-reason-04:after {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-reason-04.svg);
+  }
+  &.m-reason-05::after {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-reason-05.svg);
+  }
+
+  @include mq() {
+    gap: liquid(12);
+    padding: liquid(24);
+    border-radius: liquid(15);
+    &::after {
+      top: liquid(42);
+      right: liquid(42);
+      width: liquid(60);
+    }
+  }
+}
+
+.p-reason-card__number {
+  --length: #{liquid(18)};
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  position: absolute;
+  top: calc(-1 * var(--length));
+  width: liquid(58);
+  aspect-ratio: 58/ 60;
+  padding-top: 1.286em;
+  background: $c-primary;
+  font-size: liquid(7);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: $c-white;
+  clip-path: polygon(0 0, 150% 0, 150% 100%, 100% 100%, 50% 80%, 0 100%);
+
+  & > .m-large-en {
+    font-family: $font-en;
+    font-weight: 700;
+    font-size: 3.143em;
+    line-height: 1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: var(--length);
+    aspect-ratio: 10 /18;
+    top: 0;
+    left: 99%;
+    background: $c-accent-01;
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
+
+  @include mq() {
+    --length: #{liquid(28)};
+    font-size: liquid(10);
+    width: liquid(87);
+  }
+}
+
+h3.p-reason-card__title {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  font-size: liquid(18);
+  padding-bottom: liquid(7);
+  border-bottom: 1px solid $c-light-gray-3;
+  line-height: 1.4;
+
+  & > .c-em-primary {
+    font-size: 1.111em;
+    line-height: 1.3;
+  }
+
+  @include mq() {
+    font-size: liquid(27);
+    padding-bottom: liquid(10);
+  }
+}
+
+.p-reason-card__text {
+  padding-inline: liquid(11);
+
+  @include mq() {
+    font-size: liquid(22);
+  }
+}
+
+/* 医師情報
+  --------------------------------------------------------- */
+.p-about-doctor {
+  display: flex;
+  justify-content: center;
+  padding-block: liquid(32) liquid(40);
+
+  @include mq() {
+    padding-block: liquid(80);
+  }
+}
+
+.p-about-doctor__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: liquid(24);
+  width: var(--contents);
+
+  @include mq() {
+    gap: liquid(48);
+  }
+}
+
+h2.p-about-doctor__title {
+  font-size: liquid(24);
+  text-align: center;
+  line-height: 1.5;
+  @include mq() {
+    font-size: liquid(36);
+    line-height: 1.4;
+  }
+}
+
+.p-about-doctor__contents {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(24);
+  width: 100%;
+  padding: liquid(24) liquid(16);
+  border-radius: liquid(10);
+  background: $c-secondary;
+
+  @include mq() {
+    flex-flow: row;
+    gap: liquid(90);
+    padding: liquid(56);
+    border-radius: liquid(20);
+  }
+}
+
+.p-doctor-info {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(16);
+
+  @include mq() {
+    flex: 1 0;
+  }
+}
+
+.p-doctor-info__sub-box {
+  display: grid;
+  place-items: end center;
+  position: relative;
+  padding-inline: liquid(2);
+
+  & > * {
+    grid-area: 1/ 1/ -1/ -1;
+  }
+
+  @include mq() {
+    padding-inline: liquid(10);
+  }
+}
+
+.p-doctor-info__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p-doctor-info__name-box {
+  display: flex;
+  align-items: center;
+  gap: liquid(9);
+  position: relative;
+  bottom: liquid(8);
+  padding-block: liquid(4);
+  padding-inline: liquid(10);
+  border-radius: liquid(8);
+  background: $c-primary-a80;
+  color: $c-white;
+
+  @include mq() {
+    padding-block: liquid(6);
+    padding-inline: liquid(12);
+    border-radius: liquid(11);
+    bottom: liquid(10);
+  }
+}
+
+.p-doctor-info__title {
+  font-size: liquid(14);
+  @include mq() {
+    font-size: liquid(19);
+  }
+}
+
+.p-doctor-info__name {
+  font-size: liquid(32);
+  line-height: 1;
+  font-weight: 700;
+  @include mq() {
+    font-size: liquid(43);
+  }
+}
+
+.p-doctor__list {
+  font-size: liquid(13);
+  font-weight: 500;
+
+  & > li {
+    display: flex;
+    line-height: 1.7;
+
+    &::before {
+      content: "・";
+    }
+  }
+
+  @include mq() {
+    font-size: liquid(18);
+
+    & > li {
+      line-height: 1.9;
+    }
+
+    &.m-biography {
+      font-size: liquid(20);
+    }
+  }
+}
+
+.p-doctor-biography {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(8);
+
+  @include mq() {
+    justify-content: center;
+    flex: 1.1 0;
+  }
+}
+
+.p-doctor-biography__title {
+  font-size: liquid(20);
+  color: $c-primary;
+
+  @include mq() {
+    font-size: liquid(32);
+  }
+}
+
+/* 診療の流れ
+  --------------------------------------------------------- */
+.p-flow {
+  display: flex;
+  justify-content: center;
+  padding-block: liquid(32);
+  @include mq() {
+    padding-block: liquid(80);
+  }
+}
+
+.p-flow__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: var(--contents);
+}
+.p-flow__list {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(24);
+  padding-top: liquid(24);
+  @include mq() {
+    margin-top: liquid(84);
+    padding: liquid(60) liquid(24);
+    border-radius: liquid(20);
+    background: $c-secondary;
+  }
+}
+
+.p-flow-card {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(16);
+  padding: liquid(24) liquid(16) liquid(26);
+  border-radius: liquid(10);
+  background: $c-secondary;
+  @include mq() {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "title title"
+      "img   text";
+    gap: liquid(24) liquid(36);
+    padding: liquid(36) liquid(36) liquid(32) liquid(12);
+    background: transparent;
+  }
+}
+
+.p-flow-card__title-area {
+  display: flex;
+  align-items: center;
+  gap: liquid(16);
+  @include mq() {
+    grid-area: title;
+  }
+}
+
+.p-flow-card__step-icon {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: liquid(46);
+  aspect-ratio: 1/ 1;
+  border-radius: 50%;
+  background: $c-primary;
+  color: $c-white;
+  font-size: liquid(7);
+  font-weight: 700;
+
+  & > .m-large-en {
+    font-family: $font-en-2;
+    font-weight: 700;
+    font-size: 3.142em;
+    line-height: 1;
+  }
+
+  @include mq() {
+    width: liquid(70);
+    font-size: liquid(11);
+  }
+}
+
+h3.p-flow-card__title {
+  font-size: liquid(22);
+  color: $c-primary;
+  font-weight: 700;
+  @include mq() {
+    font-size: liquid(32);
+  }
+}
+
+.p-flow-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  @include mq() {
+    grid-area: img;
+    aspect-ratio: 476/ 288;
+  }
+}
+
+.p-flow-card__text {
+  text-align: justify;
+  line-height: 1.6;
+  @include mq() {
+    grid-area: text;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    font-size: liquid(22);
+    letter-spacing: 0.04em;
+  }
+}
+
+/* アクセス
+  --------------------------------------------------------- */
+.p-access {
+  display: flex;
+  justify-content: center;
+  padding-block: liquid(32);
+  @include mq() {
+    padding-block: liquid(80);
+  }
+}
+
+.p-access__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: var(--contents);
+}
+
+.p-access__contents {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(16);
+  width: 100%;
+  padding-block: liquid(24) liquid(16);
+
+  @include mq() {
+    display: grid;
+    grid-template-columns: min(liquid(560), 55%) min(liquid(520), 50%);
+    grid-template-areas:
+      "info  map"
+      "hours map";
+    gap: liquid(19);
+    justify-content: center;
+    width: 100%;
+    padding-block: liquid(62) liquid(16);
+  }
+}
+
+.p-clinic-info {
+  border-top: 1px solid $c-light-gray-4;
+  border-bottom: 1px solid $c-light-gray-4;
+  @include mq() {
+    grid-area: "info";
+  }
+}
+
+.p-clinic-info__group {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(8);
+  padding: liquid(15);
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $c-light-gray-4;
+  }
+  @include mq() {
+    flex-flow: row;
+    align-items: center;
+    gap: 0;
+    padding: liquid(24);
+  }
+}
+
+.p-clinic-info__title {
+  font-weight: 700;
+  @include mq() {
+    width: liquid(140);
+  }
+}
+
+.p-clinic-info__desc {
+  font-weight: 500;
+  font-size: liquid(14);
+  @include mq() {
+    font-size: liquid(16);
+  }
+}
+
+.p-consultation-hours {
+  border-radius: liquid(8);
+  background: $c-secondary;
+  overflow: clip;
+  padding-bottom: liquid(16);
+
+  @include mq() {
+    border-radius: liquid(12);
+    padding-block: liquid(12);
+    padding-inline: liquid(10);
+  }
+}
+
+.p-consultation-hours__table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  & caption {
+    caption-side: bottom;
+    font-weight: 700;
+    font-size: liquid(12);
+    text-align: left;
+    padding-top: liquid(4);
+    padding-inline: liquid(12);
+  }
+
+  & tr {
+    &:not(:last-child) {
+      border-bottom: 1px solid $c-light-gray-4;
+    }
+  }
+
+  & th {
+    padding-block: liquid(14);
+    padding-inline: liquid(8);
+    font-size: liquid(13);
+    font-weight: 700;
+    text-align: center;
+
+    &:last-child {
+      padding-right: liquid(16);
+    }
+
+    &.m-row-header {
+      width: liquid(110);
+      padding-inline: liquid(16) liquid(8);
+      box-sizing: border-box;
+      text-align: left;
+    }
+  }
+
+  & td {
+    padding-block: liquid(16);
+    padding-inline: liquid(8);
+    font-size: liquid(12);
+    color: $c-primary;
+    text-align: center;
+
+    &:last-child {
+      padding-right: liquid(16);
+    }
+
+    &.m-black {
+      color: $c-dark-gray-1;
+    }
+  }
+  @include mq() {
+    grid-area: hours;
+
+    & caption {
+      font-size: liquid(14);
+    }
+
+    & th {
+      width: liquid(60);
+      font-size: liquid(14);
+      padding-block: liquid(12);
+      border-left: 1px solid $c-light-gray-4;
+
+      &:last-child {
+        padding-right: liquid(8);
+      }
+
+      &.m-row-header {
+        width: liquid(120);
+        padding-inline: 0;
+        text-align: center;
+        border-left: none;
+        &.m-large {
+          font-size: liquid(16);
+        }
+      }
+    }
+
+    & td {
+      width: liquid(60);
+      font-size: liquid(16);
+      padding-block: liquid(12);
+      border-left: 1px solid $c-light-gray-4;
+
+      &:last-child {
+        padding-right: liquid(8);
+      }
+    }
+  }
+}
+
+.p-google-map {
+  border-radius: liquid(8);
+  overflow: clip;
+  @include mq() {
+    grid-area: map;
+
+    & > iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: liquid(20);
+    }
+  }
+}
+
+/* よくある問い合わせ
+  --------------------------------------------------------- */
+.p-faq {
+  display: flex;
+  justify-content: center;
+  padding-block: liquid(32);
+
+  @include mq() {
+    padding-block: liquid(76) liquid(80);
+  }
+}
+
+.p-faq__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: var(--contents);
+}
+
+.p-faq__lists {
+  display: flex;
+  flex-flow: column;
+  gap: liquid(16);
+  width: min(100%, liquid(880));
+  padding-top: liquid(24);
+
+  @include mq() {
+    gap: liquid(26);
+    padding-top: liquid(60);
+  }
+}
+
+/* フッター
+  --------------------------------------------------------- */
+.p-footer {
+  display: flex;
+  justify-content: center;
+  padding-block: liquid(20) liquid(100);
+  background: $c-secondary;
+  @include mq() {
+    padding-block: liquid(60);
+  }
+}
+
+.p-footer__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: liquid(16);
+  width: var(--contents);
+  @include mq() {
+    width: liquid(1000);
+    flex-flow: row;
+    justify-content: space-between;
+  }
+}
+
+.p-footer__logo {
+  aspect-ratio: 151/ 47;
+  width: liquid(139);
+
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include mq() {
+    width: liquid(151);
+  }
+}
+
+.p-footer__address {
+  font-size: liquid(14);
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  color: #333;
+
+  @include mq() {
+    font-size: liquid(16);
+    text-align: left;
+  }
+}
+
+/* 追随CTA
+  --------------------------------------------------------- */
+.p-fixed-cta {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: liquid(80);
+  background: $c-secondary;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+
+  @include mq(sp) {
+    translate: 0 liquid(20);
+    bottom: env(safe-area-inset-bottom, 0);
+    padding-bottom: liquid(20);
+  }
+
+  @include mq() {
+    height: auto;
+    flex-flow: column;
+    width: 70px;
+    right: 0;
+    top: calc((100vh - liquid(554)) / 2);
+    // bottom: calc((100vh - liquid(554)) / 2);
+    margin-block: auto;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+.p-fixed-cta__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: liquid(8);
+  width: var(--contents);
+
+  @include mq() {
+    display: flex;
+    flex-flow: column;
+    width: liquid(70);
+    height: liquid(554);
+    justify-content: center;
+    gap: 0;
+  }
+}
+
+.p-fixed-cta__button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: liquid(31);
+  border-radius: 100vmax;
+  color: $c-white;
+  text-decoration: none;
+  line-height: 1.5;
+  // アイコン有基本
+  padding-inline: liquid(13) liquid(9);
+  font-size: liquid(11);
+  font-weight: 700;
+
+  // 色指定
+  &.m-reserve {
+    background: $c-primary;
+  }
+
+  &.m-consult {
+    background: $c-line;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    flex-shrink: 0;
+    background-position: center;
+    background-size: cover;
+    aspect-ratio: 1/ 1;
+  }
+
+  &::before {
+    width: liquid(18);
+  }
+
+  &.m-reserve::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-reserve.svg);
+  }
+
+  &.m-consult::before {
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-consult.svg);
+  }
+
+  &::after {
+    width: liquid(14);
+    background-image: url(https://www.yoshijibika.com/wp-content/uploads/2024/08/icon-right-arrow.svg);
+  }
+
+  @include mq() {
+    justify-content: center;
+    gap: 0.5em;
+    width: 100%;
+    height: liquid(277);
+    writing-mode: vertical-rl;
+    letter-spacing: 0.25em;
+    font-size: liquid(18);
+
+    &.m-reserve {
+      border-radius: 0 0 0 liquid(10);
+    }
+    &.m-consult {
+      border-radius: liquid(10) 0 0 0;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      background-position: center;
+      background-size: cover;
+      aspect-ratio: 1/ 1;
+    }
+    &::before {
+      width: liquid(24);
+    }
+    &::after {
+      width: liquid(26);
+    }
+  }
+}
+
+/* アニメーション
+  --------------------------------------------------------- */
+@keyframes shine {
+  0% {
+    background-position: right center;
+  }
+  20% {
+    background-position: right center;
+  }
+  25% {
+    background-position: left center;
+  }
+  100% {
+    background-position: left center;
+  }
+}
